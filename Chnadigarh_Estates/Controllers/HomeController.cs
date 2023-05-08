@@ -76,6 +76,11 @@ namespace Chandigarh_estates_web.Controllers
             return View(usr);
         }
 
+        public IActionResult ForgotPassword()
+        {
+            return View(); 
+        }
+
 
         public List<Country_Table> ListOfCountries()
         {
