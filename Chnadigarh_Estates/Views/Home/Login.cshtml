@@ -118,7 +118,7 @@
                                     <i class="fas fa-lock"></i>
                                     <input type="password" name="Password" id="Password" asp-for=Password value="@Model.Password" placeholder="Enter your password" required>
                                 </div>
-                                <div class="text"><a href="#">Forgot password?</a></div>
+                                <div class="text"><a asp-controller="Home" asp-action="ForgotPassword">Forgot password?</a></div>
                                 <div class="button input-box">
                                     <input type="submit" onclick="validate()" name="submit">
 
