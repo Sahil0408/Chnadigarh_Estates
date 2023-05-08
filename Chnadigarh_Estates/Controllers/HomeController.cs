@@ -15,6 +15,7 @@ namespace Chandigarh_estates_web.Controllers
             _Context = Context;
         }
 
+
         public IActionResult Index()
         {
             return View();
