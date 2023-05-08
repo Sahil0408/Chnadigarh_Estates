@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chnadigarh_Estates", "Chnad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chandigarh_Estates", "Chandigarh_Estate_Models\Chandigarh_Estates.csproj", "{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chandigarh_Estate_API", "Chandigarh_Estate_API\Chandigarh_Estate_API.csproj", "{B794240E-F2D1-40D7-9E5D-5E9BBE2EE6C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B794240E-F2D1-40D7-9E5D-5E9BBE2EE6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B794240E-F2D1-40D7-9E5D-5E9BBE2EE6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B794240E-F2D1-40D7-9E5D-5E9BBE2EE6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B794240E-F2D1-40D7-9E5D-5E9BBE2EE6C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
