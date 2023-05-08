@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chnadigarh_Estates", "Chnadigarh_Estates\Chnadigarh_Estates.csproj", "{2D77529A-E5AE-43FA-B802-DD769E47FC86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chandigarh_Estates", "Chandigarh_Estate_Models\Chandigarh_Estates.csproj", "{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2D77529A-E5AE-43FA-B802-DD769E47FC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D77529A-E5AE-43FA-B802-DD769E47FC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D77529A-E5AE-43FA-B802-DD769E47FC86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
