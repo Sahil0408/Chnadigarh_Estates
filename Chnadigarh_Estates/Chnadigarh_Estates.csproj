@@ -13,11 +13,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    
+    <ProjectReference Include="..\Chandigarh_Estate_API\Chandigarh_Estate_API.csproj" />
     <ProjectReference Include="..\Chandigarh_Estate_Models\Chandigarh_Estates.csproj" />
   </ItemGroup>
 
