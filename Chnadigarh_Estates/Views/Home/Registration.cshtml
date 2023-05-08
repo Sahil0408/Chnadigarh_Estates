@@ -1,0 +1,326 @@
+﻿@*@using Chandigarh_Estates;
+@model Chandigarh_Estates.Registration
+
+
+@{
+    Layout = "~/Views/Shared/_loginLayout.cshtml";
+}
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
+    
+     <link href="/css/css/Reg.css" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+                <form asp-controller="Home" asp-action="Registration" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">First Name</span>
+            <input type="text" placeholder="Enter your First Name" name="Fname" required value="@Model.Fname" >
+          </div>
+          <div class="input-box">
+                        <span class="details">Last Name</span>
+            <input type="text" placeholder="Enter your Last Name" name="Lname" required value="@Model.Lname">
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" name="Email" required value="@Model.Email" >
+          </div>
+                    <div class="input-box">
+                        <span class="details">Password</span>
+                        <input type="password" placeholder="Enter your Password" name="Password" required value="@Model.Password" >
+                    </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number"name="PhoneNo" required value="@Model.PhoneNo" >
+          </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+
+                        <p style="text-align:center">
+                            Country:
+
+                            <select style="text-align:center" onchange="getstate()" id="CountryId" name="CountryId" asp-for="CountryId">
+                                {
+                                @{
+                                    foreach (var country in (List<Country_Table>)TempData["Country"])
+                                    {
+                                        <option value="@country.CountryId"> @country.CountryName </option>
+                                    }
+                                }
+                            </select>
+                            </p>
+                            <p>
+                         States:
+                            <select onchange="getCity()" id="ddlState" Name="StateId" asp-for="StateId">
+                            </select>
+                            </p>
+                            <p>
+                            City:
+                            <select id="ddlCity" name="CityId" asp-for="CityId">
+                            </select>
+
+                        </p>
+
+          </div>
+                 </div>
+        <div class="button">
+          <input type="submit" value="Register" name="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+
+<script>
+
+    function getstate() {
+        debugger;
+        var countryId = $("#CountryId").val();
+
+        $.get("/Home/GetState/" + countryId,
+            function (res) {
+
+                debugger;
+                //  var s = "<option value = 'res.state_Id' > res.state_Name < /option>";
+                //$("#ddlState").html(s);
+
+                for (var i = 0; i < res.length; i++) {
+                    var option = "<option value=" + res[i].stateId + ">" + res[i].stateName + "</option>";
+                    $("#ddlState").append(option);
+                }
+                 alert('Ajax called');
+            });
+
+
+        alert('called');
+    }
+    function getCity() {
+        debugger;
+        var stateId = $("#ddlState").val();
+
+        $.get("/Home/GetCity/" + stateId,
+            function (res) {
+
+                debugger;
+
+                for (var i = 0; i < res.length; i++) {
+                    var option = "<option value='" + res[i].cityId + "'>" + res[i].cityName + "</option>";
+                    $("#ddlCity").append(option);
+                }
+                // alert('Ajax called');
+            });
+
+
+        alert('called');
+    }
+
+</script>
+*@
+
+@using Chandigarh_Estates;
+@model Chandigarh_Estates.Registration
+
+
+@{
+    Layout = "~/Views/Shared/_loginLayout.cshtml";
+}
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
+
+    <link href="/css/css/Reg.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <div class="title">Registration</div>
+        <div id="msg" style="color:red"></div>
+        <div class="content">
+            <form asp-controller="Home" asp-action="Registration" method="post">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">First Name</span>
+                        <input type="text" placeholder="Enter your First Name" name="Fname" id="Fname" required value="@Model.Fname">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Last Name</span>
+                        <input type="text" placeholder="Enter your Last Name" name="Lname" id="Lname" required value="@Model.Lname">
+                    </div>
+
+
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="text" placeholder="Enter your email" onblur="checkemail()" id="Email" name="Email" required value="@Model.Email">
+                        <span style="color:red" id="msgmail"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Password</span>
+                        <input type="password" placeholder="Enter your Password" id="Password" name="Password" required value="@Model.Password">
+
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input type="text" placeholder="Enter your number" id="PhoneNo" name="PhoneNo" required value="@Model.PhoneNo">
+
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Address</span>
+
+                        <p style="text-align:center">
+                            Country:
+
+                            <select style="text-align:center" onchange="getstate()" id="CountryId" name="CountryId" asp-for="CountryId">
+                                {
+                                @{
+                                    foreach (var country in (List<Country_Table>)TempData["Country"])
+                                    {
+                                        <option value="@country.CountryId"> @country.CountryName </option>
+                                    }
+                                }
+                            </select>
+                        </p>
+                        <p>
+                            States:
+                            <select onchange="getCity()" id="ddlState" Name="StateId" asp-for="StateId">
+                            </select>
+                        </p>
+                        <p>
+                            City:
+                            <select id="ddlCity" name="CityId" asp-for="CityId">
+                            </select>
+
+                        </p>
+
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Register" onclick="register()" name="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+<script>
+
+    function getstate() {
+        debugger;
+        var countryId = $("#CountryId").val();
+
+        $.get("/Home/GetState/" + countryId,
+            function (res) {
+
+                debugger;
+                //  var s = "<option value = 'res.state_Id' > res.state_Name < /option>";
+                //$("#ddlState").html(s);
+
+                for (var i = 0; i < res.length; i++) {
+                    var option = "<option value=" + res[i].stateId + ">" + res[i].stateName + "</option>";
+                    $("#ddlState").append(option);
+                }
+                alert('Ajax called');
+            });
+
+
+        alert('called');
+    }
+    function getCity() {
+        debugger;
+        var stateId = $("#ddlState").val();
+
+        $.get("/Home/GetCity/" + stateId,
+            function (res) {
+
+                debugger;
+
+                for (var i = 0; i < res.length; i++) {
+                    var option = "<option value='" + res[i].cityId + "'>" + res[i].cityName + "</option>";
+                    $("#ddlCity").append(option);
+                }
+                // alert('Ajax called');
+            });
+
+
+        alert('called');
+    }
+
+    function register() {
+        if (!validate()) { return; }
+
+        // Register code
+    };
+    function validate() {
+        debugger;
+        let isValidate = true;
+        let fname = $("#Fname").val();
+        let lname = $("#Lname").val();
+        let email = $("#Email").val();
+        let password = $("#Password").val();
+        let phoneNo = $("#PhoneNo").val();
+
+        $("#msg").html("");
+        if (fname == "") {
+            $("#msg").html("First Name is required");
+            isValidate = false;
+        }
+        else if (lname == "") {
+            $("#msg").html("Last Name is required");
+            isValidate = false;
+        }
+        else if (email == "") {
+            $("#msg").html("Email is required");
+            isValidate = false;
+        }
+        else if (password == "") {
+            $("#msg").html("Password is required");
+            isValidate = false;
+        }
+        else if (phoneNo == "") {
+            $("#msg").html("PhoneNo is required");
+            isValidate = false;
+        }
+    }
+    function checkemail() {
+        debugger;
+        var email = $("#Email").val();
+
+        $.get("/Home/CheckduplicateEmail/?email=" + email,
+
+            function (res) {
+                if (res == true) {
+                    $("#msgmail").html("This email is already exist");
+                }
+                else {
+                    $("#msgmail").html(" ");
+                }
+            }
+        );
+
+    }
+
+
+
+
+
+</script>

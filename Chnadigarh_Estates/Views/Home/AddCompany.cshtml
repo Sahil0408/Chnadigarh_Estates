@@ -1,0 +1,104 @@
+﻿@using Chandigarh_Estates;
+@model Chandigarh_Estates.CompanyDetail
+
+
+@{
+    Layout = "_AdminLayout";
+   
+}
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
+    
+     <link href="/css/css/Reg.css" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Add Company</div>
+    <div class="content">
+                <form asp-controller="Home" asp-action="AddCompany" method="post">
+        <div class="user-details">
+          <div class="input-box">
+                        <span class="details">Company Name</span>
+                        <input type="text" placeholder="Enter your CompanyName" name="CompanyName" required value="@Model.CompanyName">
+          </div>
+          <div class="input-box">
+            <span class="details">Company Email</span>
+            <input type="email" placeholder="Enter your Company's Email" name="Email" required value="@Model.Email" >
+          </div>
+                    <div class="input-box">
+                        <span class="details">Pin</span>
+                        <input type="text" placeholder="Enter your Pin" name="Pin" required value="@Model.Pin" >
+                    </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+                        <input type="text" placeholder="Enter your number" name="ContactNo" required value="@Model.ContactNo">
+          </div>
+                    <div class="input-box">
+                        <span class="details">Company Address</span>
+                        <input type="text" placeholder="Enter your Company's Address" name="Address" required value="@Model.Address">
+                    </div>
+
+          <div class="input-box">
+                <p style="text-align:center">
+                            
+                         States:
+                            <select onchange="getCity()" id="ddlState" Name="StateId" asp-for="StateId">
+                                {
+                                @{
+                                    foreach (var state in (List<State_Table>)TempData["State"])
+                                    {
+                                        <option value="@state.StateId"> @state.StateName</option>
+                                    }
+                                }
+
+                            </select>
+                            </p>
+                            <p>
+                            City:
+                            <select id="ddlCity" name="CityId" asp-for="CityId">
+                            </select>
+
+                        </p>
+
+          </div>
+                 </div>
+        <div class="button">
+          <input type="submit" value="Add" name="Add">
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+
+<script>
+
+        function getCity() {
+        debugger;
+        var stateId = $("#ddlState").val();
+
+        $.get("/Home/GetCity/" + stateId,
+            function (res) {
+
+                debugger;
+
+                for (var i = 0; i < res.length; i++) {
+                    var option = "<option value='" + res[i].cityId + "'>" + res[i].cityName + "</option>";
+                    $("#ddlCity").append(option);
+                }
+                // alert('Ajax called');
+            });
+
+
+        }
+
+</script>
