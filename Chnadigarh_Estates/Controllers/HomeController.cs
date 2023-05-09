@@ -92,6 +92,7 @@ namespace Chandigarh_estates_web.Controllers
         }
 
 
+
         public List<Country_Table> ListOfCountries()
         {
             return _Context.Countries.ToList();
@@ -171,14 +172,12 @@ namespace Chandigarh_estates_web.Controllers
             Lm.IsActive = true;
             _Context.Logins.Add(Lm);
             _Context.SaveChanges();
-
+            
             if (obj != null)
             {
                 TempData["Message"] = "Data Saved Successfully";
             }
-            TempData["Country"] = ListOfCountries();
-            return View(new Registration());
-
+            return RedirectToAction("Login");
         }
         public IActionResult Admin()
         {
