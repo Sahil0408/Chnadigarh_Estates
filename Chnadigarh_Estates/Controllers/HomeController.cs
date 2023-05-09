@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.Metrics;
-using System.Net.Mail;
-using System.Net;
 using Chandigarh_Estates;
 using Chandigarh_estates_web.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -93,45 +91,7 @@ namespace Chandigarh_estates_web.Controllers
             return View(); 
         }
 
-        public void SendEmail(string _email)
-        {
-            String SendMailFrom = "alkaraj732@gmail.com";
-            String SendMailTo = _email;
-            String SendMailSubject = "Forgot password";
-            //   String SendMailBody = "Your password is :<b>" + pwd +"<b>";
 
-            String SendMailBody = "This is email body";
-
-            try
-            {
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
-                SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
-                MailMessage email = new MailMessage();
-                // START
-                email.From = new MailAddress(SendMailFrom);
-                email.To.Add(SendMailTo);
-                email.CC.Add(SendMailFrom);
-                email.Subject = SendMailSubject;
-                email.Body = SendMailBody;
-                email.IsBodyHtml = true;
-
-                //END
-                SmtpServer.Timeout = 5000;
-                SmtpServer.EnableSsl = true;
-                SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new NetworkCredential(SendMailFrom, "iibpkxowvgnhfpwq");
-                SmtpServer.Send(email);
-
-            }
-            catch (Exception ex)
-            {
-                // error message catch/show
-                string errormsg = ex.Message;
-
-                //save into database
-                //Email to developer/manager
-            }
-        }
 
         public List<Country_Table> ListOfCountries()
         {
@@ -212,13 +172,12 @@ namespace Chandigarh_estates_web.Controllers
             Lm.IsActive = true;
             _Context.Logins.Add(Lm);
             _Context.SaveChanges();
-
+            
             if (obj != null)
             {
                 TempData["Message"] = "Data Saved Successfully";
             }
-            return RedirectToAction("Login") ;
-
+            return RedirectToAction("Login");
         }
         public IActionResult Admin()
         {
