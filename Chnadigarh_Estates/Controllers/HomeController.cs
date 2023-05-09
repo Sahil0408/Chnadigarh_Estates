@@ -2,6 +2,7 @@
 using System.Diagnostics.Metrics;
 using Chandigarh_Estates;
 using Chandigarh_estates_web.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,7 +65,7 @@ namespace Chandigarh_estates_web.Controllers
                     {
                         //HttpContext.Session.MyNewSetObject("Users", Usr);
 
-                        return RedirectToAction("UsrIndex");
+                        return RedirectToAction("Index");
                     }
                 }
                 else { TempData["message"] = "You Are Blocked to do this Please talk to your admin"; }
@@ -75,6 +76,15 @@ namespace Chandigarh_estates_web.Controllers
             }
             return View(usr);
         }
+
+
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
+
 
         public IActionResult ForgotPassword()
         {
