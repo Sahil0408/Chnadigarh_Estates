@@ -1,10 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.Metrics;
+using System.Net.Mail;
+using System.Net;
 using Chandigarh_Estates;
 using Chandigarh_estates_web.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 namespace Chandigarh_estates_web.Controllers
 {
@@ -74,7 +77,7 @@ namespace Chandigarh_estates_web.Controllers
             {
                 TempData["message"] = "Username or password is incorrect";
             }
-            return View(usr);
+            return View(new Login_Page());
         }
 
 
@@ -91,7 +94,74 @@ namespace Chandigarh_estates_web.Controllers
             return View(); 
         }
 
+        [HttpPost]
+        public IActionResult ForgotPassword(string Email)
+        {
+            //Login_Page log = _Context.Logins.Where(s=>s.Email==email).SingleOrDefault();
+            
+            String SendMailFrom = "alkaraj732@gmail.com";
+                String SendMailTo = Email;
+                String SendMailSubject = "Forgot password";
+            //   String SendMailBody = "Your password is :<b>" + pwd +"<b>";
+            String SendMailBody = " Please Click on Link to Reset Your Password" +
+                "    https://localhost:7004/Home/ResetPassword";
+            
 
+
+
+            try
+            {
+                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
+                    SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    MailMessage email = new MailMessage();
+                    // START
+                    email.From = new MailAddress(SendMailFrom);
+                    email.To.Add(SendMailTo);
+                    email.CC.Add(SendMailFrom);
+                    email.Subject = SendMailSubject;
+                    email.Body = SendMailBody;
+                    email.IsBodyHtml = true;
+
+                    //END
+                    SmtpServer.Timeout = 5000;
+                    SmtpServer.EnableSsl = true;
+                    SmtpServer.UseDefaultCredentials = false;
+                    SmtpServer.Credentials = new NetworkCredential(SendMailFrom, "jotwjlveirwmgwvk");
+                    SmtpServer.Send(email);
+
+                }
+                catch (Exception ex)
+                {
+                    // error message catch/show
+                    string errormsg = ex.Message;
+
+                    //save into database
+                    //Email to developer/manager
+                }
+
+            TempData["message"] = "Please Check Your Email";
+            return View();
+        }
+
+        public IActionResult ResetPassword()
+        {
+            
+            return View(new ResetPassword());
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPassword data)
+        {
+            Login_Page log = _Context.Logins.Where(x=>x.Email==data.Email).SingleOrDefault();
+            if (log != null)
+            {
+                log.Password = data.Password;
+                _Context.Logins.Update(log);
+                _Context.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            return RedirectToAction("ForgotPassword");
+        }
 
         public List<Country_Table> ListOfCountries()
         {
