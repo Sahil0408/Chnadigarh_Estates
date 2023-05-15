@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SCO Plot Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <br />
+        <h4 style="color:forestgreen; text-align:center">Add Plot</h4><br />
+        <div class="row">
+            <div class="col-md-6">
+                <form id="scoPlotForm" asp-action="AddPlot" asp-controller="Home">
+                    <div class="form-group">
+                        <label for="plotNumber">Plot Number:</label>
+                        <input type="text" class="form-control" id="plotNumber" name="plotNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="plotSize">Plot Size:</label>
+                        <input type="text" class="form-control" id="plotSize" name="plotSize">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingAmount">Booking Amount:</label>
+                        <input type="text" class="form-control" id="bookingAmount" name="bookingAmount">
+                    </div>
+                    <div class="form-group">
+                        <label for="dimension">Dimension:</label>
+                        <input type="text" class="form-control" id="dimension" name="dimension">
+                    </div>
+                    <div class="form-group">
+                        <label for="unitRate">Unit Rate:</label>
+                        <input type="text" class="form-control" id="unitRate" name="unitRate">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="Available">Available</option>
+                            <option value="Sold">Sold</option>
+                            <option value="Booked">Booked</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="plotUnit">Plot Unit:</label>
+                        <input type="text" class="form-control" id="plotUnit" name="plotUnit">
+                    </div>
+                    <div class="form-group">
+                        <label for="blockPrice">Block Price:</label>
+                        <input type="text" class="form-control" id="blockPrice" name="blockPrice">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!-- AJAX and jQuery script -->
+<script>
+    $(document).ready(function () {
+        $('#scoPlotForm').submit(function (e) {
+            e.preventDefault();
+
+            // Serialize form data
+            var formData = $(this).serialize();
+
+            // AJAX POST request
+            $.ajax({
+                type: 'POST',
+                url: 'submit.php', // Replace with your backend script URL
+                data: formData,
+                success: function (response) {
+                    // Handle success response
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    console.log(xhr.responseText);
+                }
+</script>
+

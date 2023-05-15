@@ -1,0 +1,140 @@
+﻿@using Chandigarh_Estates
+@model Chandigarh_Estates.CompanyDetail
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Customer</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <br />
+        <h4 style="color:forestgreen; text-align:center">Add New Customer</h4><br />
+
+        <form id="customerForm">
+            <div class="form-group">
+                <label for="company">CompanyName:</label>
+                <select class="form-control" id="CompanyId" asp-for="CompanyId" name="CompanyId" required>
+               {
+                    @foreach (var company in (List<CompanyDetail>)TempData["Companies"])
+                    {
+                        <option value="@company.CompanyId">@company.CompanyName</option>
+                    }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="companyDetail">Company Detail:</label>
+                <textarea class="form-control" id="companyDetail" name="companyDetail" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" class="form-control" id="amount" name="amount" required>
+            </div>
+
+            <div class="form-group">
+                <label for="customerName">CustomerName:</label>
+                <input type="text" class="form-control" id="customerName" name="customerName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobileNo">Mobile No:</label>
+                <input type="text" class="form-control" id="mobileNo" name="mobileNo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="transactionNo">Transaction No:</label>
+                <input type="text" class="form-control" id="transactionNo" name="transactionNo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="plotSize">Plot Size:</label>
+                <input type="text" class="form-control" id="plotSize" name="plotSize" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#customerForm').submit(function (e) {
+                e.preventDefault();
+
+                // Perform form validation here if needed
+
+                // Get form data
+                var formData = {
+                    company: $('#company').val(),
+                    companyDetail: $('#companyDetail').val(),
+                    amount: $('#amount').val(),
+                    customerId: $('#customerId').val(),
+                    customerName: $('#customerName').val(),
+                    mobileNo: $('#mobileNo').val(),
+                    transactionNo: $('#transactionNo').val(),
+                    plotSize: $('#plotSize').val()
+                };
+
+                        // Perform AJAX request to submit form data to the server
+</script>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Populate the company dropdown list on page load
+        populateCompanyDropdown();
+
+        $('#customerForm').submit(function (e) {
+            e.preventDefault();
+
+            // Rest of the code...
+
+            // Get form data
+            var formData = {
+                company: $('#company').val(),
+                companyDetail: $('#companyDetail').val(),
+                // Rest of the fields...
+            };
+
+            // Perform AJAX request to submit form data to the server
+        });
+    });
+
+    function populateCompanyDropdown() {
+        // Perform AJAX request to get the company data
+        $.ajax({
+            url: '/YourController/GetCompanies', // Replace with the actual URL and controller action to fetch the company data
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Populate the dropdown options
+                var dropdown = $('#company');
+                dropdown.empty();
+                dropdown.append('<option value="">Select a company</option>');
+                $.each(data, function (key, entry) {
+                    dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
+                });
+            },
+            error: function (xhr, status, error) {
+                // Handle error
+                console.log(error);
+            }
+        });
+    }
+</script>

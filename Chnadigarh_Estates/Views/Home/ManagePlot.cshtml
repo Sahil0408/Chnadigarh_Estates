@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plot Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Manage Plot</h2>
+        <form id="plotForm" asp-action="ManagePlot" asp-controller="Home">
+            <!-- Form fields... -->
+        </form>
+        <table id="plotTable" class="display">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Number</th>
+                    <th>Block</th>
+                    <th>Size</th>
+                    <th>Unit</th>
+                    <th>Denomination</th>
+                    <th>Unit Rate</th>
+                    <th>Price</th>
+                    <th>Token Amount</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <!-- AJAX and jQuery script -->
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#plotTable').DataTable();
+
+            $('#plotForm').submit(function (e) {
+                e.preventDefault();
+
+                // Serialize form data
+                var formData = $(this).serializeArray();
+
+                // Clear existing table data
+                table.clear();
+
+                // Add form data to the table
+                formData.forEach(function (field) {
+                    var row = [];
+                    row.push(field.value);
+                    table.row.add(row);
+                });
+
+                // Redraw the table
+                table.draw();
+            });
+        });
+    </script>
+</body>
+</html>
