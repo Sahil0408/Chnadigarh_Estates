@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Chandigarh_Estate_Models\Chandigarh_Estates.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

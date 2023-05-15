@@ -49,6 +49,7 @@
     <Compile Include="CompanyContactDetail.cs" />
     <Compile Include="CompanyDetail.cs" />
     <Compile Include="Country_Table.cs" />
+    <Compile Include="StoreModel.cs" />
     <Compile Include="ResetPassword.cs" />
     <Compile Include="Login_Page.cs" />
     <Compile Include="Customer_Table.cs" />
