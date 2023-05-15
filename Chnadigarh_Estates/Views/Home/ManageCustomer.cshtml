@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Management</title>
+    <!-- Include necessary CSS and JavaScript files -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <table id="customerTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Parent Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Mobile No.</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            $('#customerTable').DataTable({
+                "ajax": "GetData.aspx",  // Path to the server-side script that fetches data
+                "columns": [
+                    { "data": "CustomerId" },
+                    { "data": "Name" },
+                    { "data": "ParentName" },
+                    { "data": "Address" },
+                    { "data": "City" },
+                    { "data": "MobileNo" },
+                    { "data": "CreatedDate" }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
