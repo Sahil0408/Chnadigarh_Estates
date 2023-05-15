@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
+using System.Data.Entity;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Chandigarh_estates_web.Controllers
 {
@@ -250,6 +252,23 @@ namespace Chandigarh_estates_web.Controllers
             return RedirectToAction("Login");
         }
         public IActionResult Admin()
+        {
+            return View();
+        }
+        //public IActionResult GetUsers()
+        //{
+        //    List<SqlParameter> para = new List<SqlParameter>();
+        //    var str = _Context.StoreModels.FromSqlRaw("EXEC GetUsers", para.ToArray());
+        //    return Json(str);
+        //}
+
+        public List<StoreModel> GetUsers()
+        {
+            var sm = _Context.StoreModels.FromSqlRaw("GetUsers", new List<SqlParameter>().ToArray());
+             return sm.ToList();
+
+        }
+        public IActionResult ManageUser()
         {
             return View();
         }

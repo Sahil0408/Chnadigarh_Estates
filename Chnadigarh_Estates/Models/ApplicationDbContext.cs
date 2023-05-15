@@ -16,6 +16,7 @@ namespace Chandigarh_estates_web.Models
             public DbSet<State_Table> States { get; set; }
             public DbSet<City_Table> Cities { get; set; }
             public DbSet<CompanyDetail> Companies { get; set; }
+            public DbSet<StoreModel> StoreModels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -25,6 +26,7 @@ namespace Chandigarh_estates_web.Models
                 modelBuilder.Entity<State_Table>().ToTable("State_Table");
                 modelBuilder.Entity<City_Table>().ToTable("City_Table");
                 modelBuilder.Entity<CompanyDetail>().ToTable("CompanyDetail");
+                modelBuilder.Entity<StoreModel>().HasNoKey();
         }
 
         }
