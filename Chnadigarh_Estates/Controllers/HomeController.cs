@@ -264,16 +264,28 @@ namespace Chandigarh_estates_web.Controllers
         public IActionResult AddNewCustomer()
         {
             TempData["Companies"] = ListOfCompanies();
-            return View();
+            return View(new manageCustomer());
         }
-
-        public IActionResult AddNewCustomer(CompanyDetail com)
+        [HttpPost]
+        public IActionResult AddNewCustomer(manageCustomer com)
         {
-            _Context.Companies.Add(com);
+            _Context.Customers.Add(com);
             _Context.SaveChanges();
-            return View();
+            return RedirectToAction("ManageCustomer");
         }
 
+
+        public List<CustomerVM> GetCustomers()
+        {
+            var cm = _Context.CustomersVM.FromSqlRaw("GetCustomers", new List<SqlParameter>().ToArray());
+            return cm.ToList();
+
+        }
+
+        public IActionResult ManageCustomer()
+        {
+            return View();
+        }
         public List<CompanyDetail> ListOfCompanies()
         {
             return _Context.Companies.ToList();
