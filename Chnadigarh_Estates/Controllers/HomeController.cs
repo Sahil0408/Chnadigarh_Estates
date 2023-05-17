@@ -32,19 +32,7 @@ namespace Chandigarh_estates_web.Controllers
             return View();
 
         }
-        public IActionResult PropertyList()
-        {
-            return View();
-        }
-        public IActionResult PropertyType()
-        {
-            return View();
-
-        }
-        public IActionResult PropertyAgent()
-        {
-            return View();
-        }
+        
         public IActionResult Contact()
         {
             return View();
@@ -271,6 +259,24 @@ namespace Chandigarh_estates_web.Controllers
         public IActionResult ManageUser()
         {
             return View();
+        }
+
+        public IActionResult AddNewCustomer()
+        {
+            TempData["Companies"] = ListOfCompanies();
+            return View();
+        }
+
+        public IActionResult AddNewCustomer(CompanyDetail com)
+        {
+            _Context.Companies.Add(com);
+            _Context.SaveChanges();
+            return View();
+        }
+
+        public List<CompanyDetail> ListOfCompanies()
+        {
+            return _Context.Companies.ToList();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
