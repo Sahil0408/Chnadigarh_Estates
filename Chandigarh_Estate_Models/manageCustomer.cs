@@ -9,11 +9,13 @@ namespace Chandigarh_Estates
     public class manageCustomer
     {
         public int CustomerId { get; set; }
-        public string Name { get; set; }
+        public int CompanyId { get; set; }
+        public string CustomerName { get; set; }
         public string ParentName { get; set; }
-        public string Address { get; set; }
-        public int CityId { get; set; }
-        public string MobileNo { get; set; }
-        public DateTime CreateDate { get; set; }
+        public string CustomerEmail { get; set; }
+        public string Contact { get; set; }
+        public int Amount { get; set; }
+        public int TransactionId { get; set; }
+        public string PlotSize { get; set; }
     }
 }
