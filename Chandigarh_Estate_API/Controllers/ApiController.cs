@@ -53,6 +53,22 @@ namespace Chandigarh_Estate_API.Controllers
         }
         #endregion
 
+        [HttpPost("checkLogin")]
+        public Login_Page CheckLogin(Login_Page obj) 
+        {
+            Login_Page usr = _Context.Logins.Where(s => s.Email == obj.Email && s.Password == obj.Password).SingleOrDefault();
+            if (usr != null)
+            {
+
+                return usr;
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+
         [HttpPost("AddCompanyDetails")]
         public IActionResult SaveAddCompany(CompanyDetail companyDetail)
         {
