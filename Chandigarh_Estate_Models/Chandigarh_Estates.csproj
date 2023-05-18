@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangePassword.cs" />
     <Compile Include="City_Table.cs" />
     <Compile Include="CompanyContactDetail.cs" />
     <Compile Include="CompanyDetail.cs" />

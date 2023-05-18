@@ -240,6 +240,7 @@ namespace Chandigarh_estates_web.Controllers
             }
             return RedirectToAction("Login");
         }
+        
         public IActionResult Admin()
         {
             return View();
@@ -287,6 +288,8 @@ namespace Chandigarh_estates_web.Controllers
         {
             return View();
         }
+
+       
         public List<CompanyDetail> ListOfCompanies()
         {
             return _Context.Companies.ToList();
