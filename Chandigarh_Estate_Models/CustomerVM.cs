@@ -9,7 +9,7 @@ namespace Chandigarh_Estates
     public class CustomerVM
     {
         public int CustomerId { get; set; }
-        public int CompanyName { get; set; }
+        public string CompanyName { get; set; }
         public string CustomerName { get; set; }
         public string ParentName { get; set; }
         public string CustomerEmail { get; set; }
