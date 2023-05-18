@@ -10,6 +10,11 @@ using Microsoft.Data.SqlClient;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
+//using MongoDB.Bson.IO;
+
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Net.Http.Json;
 
 namespace Chandigarh_estates_web.Controllers
 {
@@ -43,31 +48,59 @@ namespace Chandigarh_estates_web.Controllers
         }
         [HttpPost]
 
-        public IActionResult Login(Login_Page obj)
-        {
-            Login_Page usr = _Context.Logins.Where(s=>s.Email==obj.Email && s.Password==obj.Password).SingleOrDefault();
-            if (usr != null)
-            {
-                if (usr.IsActive == true)
-                {
-                    if (usr.RoleId == 1)
-                    {
-                        return RedirectToAction("Admin");
-                    }
-                    else
-                    {
-                        //HttpContext.Session.MyNewSetObject("Users", Usr);
+        //public IActionResult Login(Login_Page obj)
+        //{
+        //    Login_Page usr = _Context.Logins.Where(s=>s.Email==obj.Email && s.Password==obj.Password).SingleOrDefault();
+        //    if (usr != null)
+        //    {
+        //        if (usr.IsActive == true)
+        //        {
+        //            if (usr.RoleId == 1)
+        //            {
+        //                return RedirectToAction("Admin");
+        //            }
+        //            else
+        //            {
+        //                //HttpContext.Session.MyNewSetObject("Users", Usr);
 
-                        return RedirectToAction("Index");
-                    }
-                }
-                else { TempData["message"] = "You Are Blocked to do this Please talk to your admin"; }
-            }
-            else
+        //                return RedirectToAction("Index");
+        //            }
+        //        }
+        //        else { TempData["message"] = "You Are Blocked to do this Please talk to your admin"; }
+        //    }
+        //    else
+        //    {
+        //        TempData["message"] = "Username or password is incorrect";
+        //    }
+        //    return View(new Login_Page());
+        //}
+
+        public async Task<IActionResult> Login( Login_Page obj1) 
+        {
+           // UserDetail usrDetail = new UserDetail();
+
+            using (var client = new HttpClient())
             {
-                TempData["message"] = "Username or password is incorrect";
+                client.BaseAddress = new Uri("http://localhost:5079");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //GET Method
+                HttpResponseMessage response = await client.PostAsJsonAsync<Login_Page>("/api/WebApi/checkLogin",obj1);
+                if (response.IsSuccessStatusCode)
+                {
+                    var stringResponse = await response.Content.ReadAsStringAsync();
+                    Login_Page _usrDetail = JsonConvert.DeserializeObject<Login_Page>(stringResponse);
+
+                    return RedirectToAction("ManageCompany");
+                }
+                else
+                {
+                    Console.WriteLine("Internal server Error");
+                }
             }
-            return View(new Login_Page());
+            return View();
+        
         }
 
 
