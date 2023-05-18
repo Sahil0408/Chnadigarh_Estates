@@ -14,6 +14,7 @@ namespace Chandigarh_Estates
         
         
             [Required(ErrorMessage = "The Old Password field is required.")]
+        [Display("Old Password")]
             public string OldPassword { get; set; }
 
             [Required(ErrorMessage = "The New Password field is required.")]

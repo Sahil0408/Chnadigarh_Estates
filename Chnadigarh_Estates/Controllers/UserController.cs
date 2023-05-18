@@ -1,8 +1,11 @@
-﻿using Chandigarh_Estates;
+﻿using Amazon.Runtime.Internal.Auth;
+using Chandigarh_Estates;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Routing;
 
 namespace Chnadigarh_Estates.Controllers
 {
+    [RoutePrefix("User")]
     public class UserController : Controller
     {
         public IActionResult ChangePassword()
@@ -12,6 +15,7 @@ namespace Chnadigarh_Estates.Controllers
 
         // POST: User/ChangePassword
         [HttpPost]
+        [Route("ChangePassword")]
         public IActionResult ChangePassword(ChangePassword model)
         {
             if (!ModelState.IsValid)
