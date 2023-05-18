@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace Chandigarh_Estates
 {
     
-    
         public class CustomerVM
         {
             public int CustomerId { get; set; }
@@ -17,7 +16,8 @@ namespace Chandigarh_Estates
             public string CompanyName { get; set; }
 
             [Required(ErrorMessage = "The Customer Name field is required.")]
-        public string CustomerName { get; set; }
+
+           public string CustomerName { get; set; }
 
         [Required(ErrorMessage = "The Parent Name field is required.")]
         public string ParentName { get; set; }
