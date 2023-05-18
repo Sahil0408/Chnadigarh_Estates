@@ -182,12 +182,11 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Address</span>
-
-                        <p style="text-align:center">
-                            Country:
+                        <span class="details">Country</span>
 
                             <select style="text-align:center" onchange="getstate()" id="CountryId" name="CountryId" asp-for="CountryId">
                                 {
+                            <option value="">Select One</option>
                                 @{
                                     foreach (var country in (List<Country_Table>)TempData["Country"])
                                     {
@@ -195,18 +194,16 @@
                                     }
                                 }
                             </select>
-                        </p>
-                        <p>
-                            States:
+
+                        <span class="details">State</span>
                             <select onchange="getCity()" id="ddlState" Name="StateId" asp-for="StateId">
                             </select>
-                        </p>
-                        <p>
-                            City:
+
+                        <span class="details">City</span>
                             <select id="ddlCity" name="CityId" asp-for="CityId">
                             </select>
 
-                        </p>
+                       
 
                     </div>
                 </div>
@@ -232,14 +229,14 @@
             function (res) {
 
                 debugger;
-                //  var s = "<option value = 'res.state_Id' > res.state_Name < /option>";
-                //$("#ddlState").html(s);
+                
+                var option = $("<option></option>").val("0").text("Select One");
+                $("#ddlState").append(option);
 
                 for (var i = 0; i < res.length; i++) {
-                    var option = "<option value=" + res[i].stateId + ">" + res[i].stateName + "</option>";
+                    option = $("<option></option>").val(res[i].stateId).text(res[i].stateName);
                     $("#ddlState").append(option);
                 }
-               
             });
 
 
@@ -254,8 +251,11 @@
 
                 debugger;
 
+                var option = $("<option></option>").val("0").text("Select One");
+                $("#ddlCity").append(option);
+
                 for (var i = 0; i < res.length; i++) {
-                    var option = "<option value='" + res[i].cityId + "'>" + res[i].cityName + "</option>";
+                    option = $("<option></option>").val(res[i].cityId).text(res[i].cityName);
                     $("#ddlCity").append(option);
                 }
                 // alert('Ajax called');
