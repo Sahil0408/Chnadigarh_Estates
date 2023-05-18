@@ -2,6 +2,8 @@
 using Chandigarh_Estates;
 using Chandigarh_Estate_API;
 using Chandigarh_estates_web.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace Chandigarh_Estate_API.Controllers
 {
@@ -60,6 +62,41 @@ namespace Chandigarh_Estate_API.Controllers
 
         }
 
+        [HttpDelete("deleteCompany")]
+        public string companyDetails(int id)
+        {
+            List<SqlParameter> parms = new List<SqlParameter>
+            {
+                new SqlParameter{ParameterName ="@id",Value= id}
+            };
+            var vm = _Context.Database.ExecuteSqlRaw(" delete_companyDetails_sp @id", parms.ToArray());
+
+            return "User Deleted Successfully";
+        }
+
+        [HttpDelete("deleteCustomer")]
+        public string manageCustomer(int id)
+        {
+            List<SqlParameter> parms = new List<SqlParameter>
+            {
+                new SqlParameter{ParameterName ="@id",Value= id}
+            };
+            var vm = _Context.Database.ExecuteSqlRaw(" delete_manageCustomer_sp @id", parms.ToArray());
+
+            return "User Deleted Successfully";
+        }
+
+        [HttpDelete("DeleteRegistration")]
+        public string registration(int id)
+        {
+            List<SqlParameter> parms = new List<SqlParameter>
+            {
+                new SqlParameter{ParameterName ="@id",Value= id}
+            };
+            var vm = _Context.Database.ExecuteSqlRaw(" delete_registration_sp @id", parms.ToArray());
+
+            return "User Deleted Successfully";
+        }
 
         //[HttpGet("ForgotPassword")]
         //public string ForgotPassword123(string email)
