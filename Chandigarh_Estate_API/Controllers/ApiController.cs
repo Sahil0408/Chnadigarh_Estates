@@ -16,6 +16,7 @@ namespace Chandigarh_Estate_API.Controllers
             _Context = Context;
         }
 
+        #region "Save Registration"
         [HttpPost("Save")]
         public IActionResult SaveRegistration(Registration obj)
         {
@@ -48,11 +49,12 @@ namespace Chandigarh_Estate_API.Controllers
 
 
         }
+        #endregion
 
         [HttpPost("AddCompanyDetails")]
-        public IActionResult SaveAddCompany(CompanyDetail CD)
+        public IActionResult SaveAddCompany(CompanyDetail companyDetail)
         {
-            _Context.Companies.Add(CD);
+            _Context.Companies.Add(companyDetail);
             _Context.SaveChanges();
 
             return Ok();

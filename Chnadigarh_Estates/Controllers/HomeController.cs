@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.Metrics;
 using System.Net.Mail;
 using System.Net;
 using Chandigarh_Estates;
@@ -8,8 +7,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
-using System.Data.Entity;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
+using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 
 namespace Chandigarh_estates_web.Controllers
 {
@@ -188,6 +188,7 @@ namespace Chandigarh_estates_web.Controllers
 
            return RedirectToAction("ManageCompany");
         }
+
         [HttpGet]
         public List<CompanyDetail> GetCompany()
         {
@@ -277,9 +278,9 @@ namespace Chandigarh_estates_web.Controllers
 
         public List<CustomerVM> GetCustomers()
         {
-            var cm = _Context.CustomersVM.FromSqlRaw("GetCustomers", new List<SqlParameter>().ToArray());
+            var cm = _Context.CustomersVM.FromSqlRaw("GetCustomers");
+            Console.Write(cm);
             return cm.ToList();
-
         }
 
         public IActionResult ManageCustomer()
