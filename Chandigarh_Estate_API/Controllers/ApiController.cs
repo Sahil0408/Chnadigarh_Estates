@@ -63,40 +63,90 @@ namespace Chandigarh_Estate_API.Controllers
         }
 
         [HttpDelete("deleteCompany")]
-        public string companyDetails(int id)
+        public ResponseModel<string> companyDetails(int id)
         {
-            List<SqlParameter> parms = new List<SqlParameter>
+            ResponseModel<string> objModel = new ResponseModel<string>();
+            try
             {
-                new SqlParameter{ParameterName ="@id",Value= id}
-            };
-            var vm = _Context.Database.ExecuteSqlRaw(" delete_companyDetails_sp @id", parms.ToArray());
 
-            return "User Deleted Successfully";
+                  List<SqlParameter> parms = new List<SqlParameter>
+                  {
+                        new SqlParameter{ParameterName ="@id",Value= id}
+                  };
+                var vm = _Context.Database.ExecuteSqlRaw(" delete_companyDetails_sp @id", parms.ToArray());
+
+                objModel.IsSuccess = true;
+                objModel.StatusCode = 200;
+                objModel.Message = "Data deleted Sucessfully";
+
+            }
+            catch (Exception ex)
+            {
+                objModel.IsSuccess = false;
+                objModel.StatusCode = 500;
+                objModel.Message = ex.Message;
+            }
+            return objModel;    
         }
 
         [HttpDelete("deleteCustomer")]
-        public string manageCustomer(int id)
+        public ResponseModel<string> manageCustomer(int id)
         {
-            List<SqlParameter> parms = new List<SqlParameter>
+            ResponseModel<string> objModel = new ResponseModel<string>();
+            try
             {
-                new SqlParameter{ParameterName ="@id",Value= id}
-            };
-            var vm = _Context.Database.ExecuteSqlRaw(" delete_manageCustomer_sp @id", parms.ToArray());
 
-            return "User Deleted Successfully";
+                List<SqlParameter> parms = new List<SqlParameter>
+                {
+                            new SqlParameter{ParameterName ="@id",Value= id}
+                };
+                var vm = _Context.Database.ExecuteSqlRaw(" delete_manageCustomer_sp @id", parms.ToArray());
+
+                objModel.IsSuccess = true;
+                objModel.StatusCode = 200;
+                objModel.Message = "Data deleted Sucessfully";
+
+            }
+            catch (Exception ex)
+            {
+                objModel.IsSuccess = false;
+                objModel.StatusCode = 500;
+                objModel.Message = ex.Message;
+            }
+            return objModel;      
         }
+
 
         [HttpDelete("DeleteRegistration")]
-        public string registration(int id)
+        public ResponseModel<string> registration(int id)
         {
-            List<SqlParameter> parms = new List<SqlParameter>
+            ResponseModel<string> objModel = new ResponseModel<string>();
+            try
             {
-                new SqlParameter{ParameterName ="@id",Value= id}
-            };
-            var vm = _Context.Database.ExecuteSqlRaw(" delete_registration_sp @id", parms.ToArray());
 
-            return "User Deleted Successfully";
+                List<SqlParameter> parms = new List<SqlParameter>
+                   {
+                     new SqlParameter{ParameterName ="@id",Value= id}
+                   };
+                var vm = _Context.Database.ExecuteSqlRaw(" delete_registration_sp @id", parms.ToArray());
+                objModel.IsSuccess = true;
+                objModel.StatusCode = 200;
+                objModel.Message = "Data deleted Sucessfully";
+
+            }
+            catch (Exception ex)
+            {
+                objModel.IsSuccess = false;
+                objModel.StatusCode = 500;
+                objModel.Message = ex.Message;
+            }
+            return objModel;
         }
+
+
+
+
+
 
         //[HttpGet("ForgotPassword")]
         //public string ForgotPassword123(string email)
@@ -209,11 +259,28 @@ namespace Chandigarh_Estate_API.Controllers
         //        objModel.IsSuccess = false;
         //        objModel.StatusCode = 500;
         //        objModel.Message = ex.Message;
+        //    }
+        //    return objModel;
+        //}
+
+
+        //[HttpGet("Delete")]
+        //public ResponseModel<string> DeleteUser(int id)
+        //{
+        //    ResponseModel<string> objModel = new ResponseModel<string>();
+        //    try
+        //    {
+        //        objModel.IsSuccess = true;
+        //        objModel.StatusCode = 200;
+        //        objModel.Message = "Data deleted Sucessfully";
 
         //    }
-
-
-
+        //    catch (Exception ex)
+        //    {
+        //        objModel.IsSuccess = false;
+        //        objModel.StatusCode = 500;
+        //        objModel.Message = ex.Message;
+        //    }
         //    return objModel;
         //}
 
