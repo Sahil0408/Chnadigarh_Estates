@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Chandigarh_Estate_API\Chandigarh_Estate_API.csproj" />
-    <ProjectReference Include="..\Chandigarh_Estate_Models\Chandigarh_Estates.csproj" />
+    <ProjectReference Include="..\Chandigarh_Estate_API\WebApi.csproj" />
+    <ProjectReference Include="..\Chandigarh_Estate_Models\MyDataModels.csproj" />
   </ItemGroup>
 
 </Project>

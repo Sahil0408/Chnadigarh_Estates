@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chnadigarh_Estates", "Chnadigarh_Estates\Chnadigarh_Estates.csproj", "{2D77529A-E5AE-43FA-B802-DD769E47FC86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChandigarhWebPortal", "Chnadigarh_Estates\ChandigarhWebPortal.csproj", "{2D77529A-E5AE-43FA-B802-DD769E47FC86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chandigarh_Estates", "Chandigarh_Estate_Models\Chandigarh_Estates.csproj", "{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDataModels", "Chandigarh_Estate_Models\MyDataModels.csproj", "{2A00F8D5-88A2-4374-9FAE-8CD2FAF037BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chandigarh_Estate_API", "Chandigarh_Estate_API\Chandigarh_Estate_API.csproj", "{B794240E-F2D1-40D7-9E5D-5E9BBE2EE6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "Chandigarh_Estate_API\WebApi.csproj", "{B794240E-F2D1-40D7-9E5D-5E9BBE2EE6C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
