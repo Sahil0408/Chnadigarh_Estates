@@ -86,7 +86,9 @@ namespace Chandigarh_estates_web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //GET Method
-                HttpResponseMessage response = await client.PostAsJsonAsync<Login_Page>("/api/WebApi/checkLogin",obj1);
+                
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/WebApi/checkLogin",obj1);
                 if (response.IsSuccessStatusCode)
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
