@@ -26,7 +26,7 @@ namespace Chandigarh_Estates
             public bool IsActive { get; set; }
 
             [Required(ErrorMessage = "The RegId field is required.")]
-            public string RegId { get; set; }
+            public int RegId { get; set; }
 
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {

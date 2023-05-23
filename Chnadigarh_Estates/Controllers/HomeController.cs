@@ -10,11 +10,9 @@ using Microsoft.Data.SqlClient;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
-//using MongoDB.Bson.IO;
-
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using System.Net.Http.Json;
+using Chandigarh_Estate_API.Controllers;
 
 namespace Chandigarh_estates_web.Controllers
 {
@@ -47,37 +45,10 @@ namespace Chandigarh_estates_web.Controllers
             return View(new Login_Page());
         }
         [HttpPost]
-
-        //public IActionResult Login(Login_Page obj)
-        //{
-        //    Login_Page usr = _Context.Logins.Where(s=>s.Email==obj.Email && s.Password==obj.Password).SingleOrDefault();
-        //    if (usr != null)
-        //    {
-        //        if (usr.IsActive == true)
-        //        {
-        //            if (usr.RoleId == 1)
-        //            {
-        //                return RedirectToAction("Admin");
-        //            }
-        //            else
-        //            {
-        //                //HttpContext.Session.MyNewSetObject("Users", Usr);
-
-        //                return RedirectToAction("Index");
-        //            }
-        //        }
-        //        else { TempData["message"] = "You Are Blocked to do this Please talk to your admin"; }
-        //    }
-        //    else
-        //    {
-        //        TempData["message"] = "Username or password is incorrect";
-        //    }
-        //    return View(new Login_Page());
-        //}
-
-        public async Task<IActionResult> Login( Login_Page obj1) 
+       
+        public async Task<IActionResult> Login(Login_Page obj1)
         {
-           // UserDetail usrDetail = new UserDetail();
+            // UserDetail usrDetail = new UserDetail();
 
             using (var client = new HttpClient())
             {
@@ -86,15 +57,15 @@ namespace Chandigarh_estates_web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //GET Method
-                
 
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/WebApi/checkLogin",obj1);
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/WebApi/Authenticateuser", obj1);
                 if (response.IsSuccessStatusCode)
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
                     Login_Page _usrDetail = JsonConvert.DeserializeObject<Login_Page>(stringResponse);
 
-                    return RedirectToAction("ManageCompany");
+                    return RedirectToAction("Admin");
                 }
                 else
                 {
@@ -102,7 +73,7 @@ namespace Chandigarh_estates_web.Controllers
                 }
             }
             return View();
-        
+
         }
 
 
@@ -119,51 +90,8 @@ namespace Chandigarh_estates_web.Controllers
             return View(); 
         }
 
-        [HttpPost]
-        public IActionResult ForgotPassword(string Email)
+        public IActionResult ForgotPassword(string email)
         {
-            //Login_Page log = _Context.Logins.Where(s=>s.Email==email).SingleOrDefault();
-            
-            String SendMailFrom = "alkaraj732@gmail.com";
-                String SendMailTo = Email;
-                String SendMailSubject = "Forgot password";
-            //   String SendMailBody = "Your password is :<b>" + pwd +"<b>";
-            String SendMailBody = " Please Click on Link to Reset Your Password" +
-                "    https://localhost:7004/Home/ResetPassword";
-            
-
-
-
-            try
-            {
-                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
-                    SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    MailMessage email = new MailMessage();
-                    // START
-                    email.From = new MailAddress(SendMailFrom);
-                    email.To.Add(SendMailTo);
-                    email.CC.Add(SendMailFrom);
-                    email.Subject = SendMailSubject;
-                    email.Body = SendMailBody;
-                    email.IsBodyHtml = true;
-
-                    //END
-                    SmtpServer.Timeout = 5000;
-                    SmtpServer.EnableSsl = true;
-                    SmtpServer.UseDefaultCredentials = false;
-                    SmtpServer.Credentials = new NetworkCredential(SendMailFrom, "jotwjlveirwmgwvk");
-                    SmtpServer.Send(email);
-
-                }
-                catch (Exception ex)
-                {
-                    // error message catch/show
-                    string errormsg = ex.Message;
-
-                    //save into database
-                    //Email to developer/manager
-                }
-
             TempData["message"] = "Please Check Your Email";
             return View();
         }
@@ -172,20 +100,6 @@ namespace Chandigarh_estates_web.Controllers
         {
             
             return View(new ResetPassword());
-        }
-
-        [HttpPost]
-        public IActionResult ResetPassword(ResetPassword data)
-        {
-            Login_Page log = _Context.Logins.Where(x=>x.Email==data.Email).SingleOrDefault();
-            if (log != null)
-            {
-                log.Password = data.Password;
-                _Context.Logins.Update(log);
-                _Context.SaveChanges();
-                return RedirectToAction("Login");
-            }
-            return RedirectToAction("ForgotPassword");
         }
 
         public List<Country_Table> ListOfCountries()
@@ -298,26 +212,20 @@ namespace Chandigarh_estates_web.Controllers
             return View();
         }
 
-        public IActionResult AddNewCustomer()
-        {
-            TempData["Companies"] = ListOfCompanies();
-            return View(new manageCustomer());
-        }
-        [HttpPost]
-        public IActionResult AddNewCustomer(manageCustomer com)
-        {
-            _Context.Customers.Add(com);
-            _Context.SaveChanges();
-            return RedirectToAction("ManageCustomer");
-        }
 
+        //public IActionResult AddNewCustomer()
+        //{
+        //    TempData["Companies"] = ListOfCompanies();
+        //    return View(new manageCustomer());
+        //}
+        //[HttpPost]
+        //public IActionResult AddNewCustomer(manageCustomer com)
+        //{
+        //    _Context.Customers.Add(com);
+        //    _Context.SaveChanges();
+        //    return RedirectToAction("ManageCustomer");
+        //}
 
-        public List<CustomerVM> GetCustomers()
-        {
-            var cm = _Context.CustomersVM.FromSqlRaw("GetCustomers");
-            Console.Write(cm);
-            return cm.ToList();
-        }
 
         public IActionResult ManageCustomer()
         {
@@ -325,11 +233,6 @@ namespace Chandigarh_estates_web.Controllers
         }
 
        
-        public List<CompanyDetail> ListOfCompanies()
-        {
-            return _Context.Companies.ToList();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
