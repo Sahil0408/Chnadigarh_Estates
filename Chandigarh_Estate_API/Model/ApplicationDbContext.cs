@@ -29,9 +29,10 @@ namespace Chandigarh_estates_web.Models
                 modelBuilder.Entity<State_Table>().ToTable("State_Table");
                 modelBuilder.Entity<City_Table>().ToTable("City_Table");
                 modelBuilder.Entity<CompanyDetail>().ToTable("CompanyDetail");
+                modelBuilder.Entity<manageCustomer>().ToTable("ManageCustomer");
                 modelBuilder.Entity<StoreModel>().HasNoKey();
                 modelBuilder.Entity<CustomerVM>().HasNoKey();
-                modelBuilder.Entity<manageCustomer>().ToTable("ManageCustomer");
+               
         }
 
         }

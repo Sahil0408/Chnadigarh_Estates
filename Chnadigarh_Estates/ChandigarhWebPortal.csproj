@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
@@ -16,11 +17,12 @@
     </PackageReference>
     <PackageReference Include="MongoDB.Driver.Core" Version="2.19.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.0" />
     <PackageReference Include="T4MVC" Version="4.2.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Chandigarh_Estate_API\WebApi.csproj" />
+    <ProjectReference Include="..\Chandigarh_Estate_API\Chandigarh_Estate_API.csproj" />
     <ProjectReference Include="..\Chandigarh_Estate_Models\MyDataModels.csproj" />
   </ItemGroup>
 

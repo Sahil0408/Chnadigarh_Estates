@@ -47,7 +47,7 @@ namespace Chandigarh_Estates
             public bool IsActive { get; set; }
 
             [Required(ErrorMessage = "The Registration Id field is required.")]
-            public string RegId { get; set; }
+            public int RegId { get; set; }
         }
     }
 
