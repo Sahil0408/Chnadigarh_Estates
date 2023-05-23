@@ -40,68 +40,7 @@ namespace Chandigarh_estates_web.Controllers
         {
             return View();
         }
-        public IActionResult Login()
-        {
-            return View(new Login_Page());
-        }
-        [HttpPost]
-       
-        public async Task<IActionResult> Login(Login_Page obj1)
-        {
-            // UserDetail usrDetail = new UserDetail();
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:5079");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //GET Method
-
-
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/WebApi/Authenticateuser", obj1);
-                if (response.IsSuccessStatusCode)
-                {
-                    var stringResponse = await response.Content.ReadAsStringAsync();
-                    Login_Page _usrDetail = JsonConvert.DeserializeObject<Login_Page>(stringResponse);
-
-                    return RedirectToAction("Admin");
-                }
-                else
-                {
-                    Console.WriteLine("Internal server Error");
-                }
-            }
-            return View();
-
-        }
-
-
-        public IActionResult Logout()
-        {
-            HttpContext.SignOutAsync();
-            return RedirectToAction("Login");
-        }
-
-
-
-        public IActionResult ForgotPassword()
-        {
-            return View(); 
-        }
-
-        public IActionResult ForgotPassword(string email)
-        {
-            TempData["message"] = "Please Check Your Email";
-            return View();
-        }
-
-        public IActionResult ResetPassword()
-        {
-            
-            return View(new ResetPassword());
-        }
-
+     
         public List<Country_Table> ListOfCountries()
         {
             return _Context.Countries.ToList();

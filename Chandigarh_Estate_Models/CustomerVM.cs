@@ -30,9 +30,9 @@ namespace Chandigarh_Estates
             [RegularExpression(@"^\+\d{1,3}-\d{3}-\d{4}$", ErrorMessage = "The Contact must be in the format '+[CountryCode]-[AreaCode]-[Number]'.")]
             public string Contact { get; set; }
 
-            public decimal Amount { get; set; }
+            public int Amount { get; set; }
 
-            public string TransactionId { get; set; }
+            public int TransactionId { get; set; }
 
             public int PlotSize { get; set; }
 

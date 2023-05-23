@@ -18,6 +18,6 @@ namespace Chandigarh_Estates
         public string Contact { get; set; }
         public int Amount { get; set; }
         public int TransactionId { get; set; }
-        public string PlotSize { get; set; }
+        public int PlotSize { get; set; }
     }
 }

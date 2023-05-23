@@ -31,40 +31,40 @@ namespace Chandigarh_Estate_API.Controllers
         [ActionName("GetUsers")]
         public List<CustomerVM> GetCustomers()
         {
-            var cm = _Context.CustomersVM.FromSqlRaw("GetCustomers");
-            Console.Write(cm);
-            return cm.ToList();
+            var cm = _Context.CustomersVM.FromSqlRaw("GetCustomers").ToList();
+            
+            return cm;
         }
 
 
 
-        //[HttpDelete()]
-        //[ActionName("deleteCustomer")]
-        //public ResponseModel<string> manageCustomer(int id)
-        //{
-        //    ResponseModel<string> objModel = new ResponseModel<string>();
-        //    try
-        //    {
+        [HttpDelete()]
+        [ActionName("deleteCustomer")]
+        public ResponseModel<string> manageCustomer(int id)
+        {
+            ResponseModel<string> objModel = new ResponseModel<string>();
+            try
+            {
 
-        //        List<SqlParameter> parms = new List<SqlParameter>
-        //        {
-        //                    new SqlParameter{ParameterName ="@id",Value= id}
-        //        };
-        //        var vm = _Context.Database.ExecuteSqlRaw(" delete_manageCustomer_sp @id", parms.ToArray());
+                List<SqlParameter> parms = new List<SqlParameter>
+                {
+                            new SqlParameter{ParameterName ="@id",Value= id}
+                };
+                var vm = _Context.Database.ExecuteSqlRaw(" delete_manageCustomer_sp @id", parms.ToArray());
 
-        //        objModel.IsSuccess = true;
-        //        objModel.StatusCode = 200;
-        //        objModel.Message = "Data deleted Sucessfully";
+                objModel.IsSuccess = true;
+                objModel.StatusCode = 200;
+                objModel.Message = "Data deleted Sucessfully";
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        objModel.IsSuccess = false;
-        //        objModel.StatusCode = 500;
-        //        objModel.Message = ex.Message;
-        //    }
-        //    return objModel;      
-        //}
+            }
+            catch (Exception ex)
+            {
+                objModel.IsSuccess = false;
+                objModel.StatusCode = 500;
+                objModel.Message = ex.Message;
+            }
+            return objModel;
+        }
 
 
     }
