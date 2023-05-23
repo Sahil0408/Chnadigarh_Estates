@@ -1,7 +1,9 @@
-﻿using Amazon.Runtime.Internal.Auth;
-using Chandigarh_Estates;
+﻿using Chandigarh_Estates;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http.Routing;
+using System.Web.Mvc;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
+using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Chnadigarh_Estates.Controllers
 {
