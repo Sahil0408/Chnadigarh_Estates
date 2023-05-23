@@ -129,10 +129,7 @@ namespace Chandigarh_estates_web.Controllers
             return RedirectToAction("Login");
         }
         
-        public IActionResult Admin()
-        {
-            return View();
-        }
+        
         //public IActionResult GetUsers()
         //{
         //    List<SqlParameter> para = new List<SqlParameter>();

@@ -50,7 +50,7 @@ namespace Chnadigarh_Estates.Controllers
                 //GET Method
 
 
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/WebApi/Authenticateuser", obj1);
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/Account/CheckLogin", obj1);
                 if (response.IsSuccessStatusCode)
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
@@ -92,6 +92,9 @@ namespace Chnadigarh_Estates.Controllers
 
             return View(new ResetPassword());
         }
-
+        public IActionResult Admin()
+        {
+            return View();
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace Chandigarh_Estate_API.Controllers
             }
             else
             {
-                RedirectToAction("Login", "Home");
+                RedirectToAction("Login", "User");
             }
             return usr;
         }
