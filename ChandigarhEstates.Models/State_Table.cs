@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chandigarh_Estates
+namespace ChandigarhEstates.Model
 {
-    public class Country_Table
+    public class State_Table
     {
         [Key]
-        public int? CountryId { get; set; }
-        public string CountryName { get; set; }
-
+        public int StateId { get; set; }
+        public string StateName { get; set; }
+        public int CountryId { get; set; }
     }
 }

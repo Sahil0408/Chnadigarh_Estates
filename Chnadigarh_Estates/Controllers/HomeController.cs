@@ -1,18 +1,14 @@
 ﻿using System.Diagnostics;
-using System.Net.Mail;
-using System.Net;
-using Chandigarh_Estates;
 using Chandigarh_estates_web.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
+using ChandigarhEstates.Data;
+using ChandigarhEstates.Model;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using Chandigarh_Estate_API.Controllers;
 
 namespace Chandigarh_estates_web.Controllers
 {
@@ -88,6 +84,35 @@ namespace Chandigarh_estates_web.Controllers
         {
             List<CompanyDetail> List = _Context.Companies.ToList();
             return View(List);
+        }
+
+        public IActionResult DeleteManageCompany(int id) 
+        {
+
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri("http://localhost:5079");
+            //    client.DefaultRequestHeaders.Accept.Clear();
+            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //    //GET Method
+
+
+            //    HttpResponseMessage response = await client.PostAsJsonAsync("api/Account/CheckLogin");
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var stringResponse = await response.Content.ReadAsStringAsync();
+            //        Login_Page _usrDetail = JsonConvert.DeserializeObject<Login_Page>(stringResponse);
+
+            //        return RedirectToAction("Admin");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Internal server Error");
+            //    }
+            //}
+            return View();
+
         }
 
         public IActionResult Registration(int id)

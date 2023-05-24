@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chandigarh_Estates
+namespace ChandigarhEstates.Model
 {
     public class ManagePlot
     {

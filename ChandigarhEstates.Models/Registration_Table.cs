@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chandigarh_Estates
+namespace ChandigarhEstates.Model
 {
-    
-        public class Registration
-        {
+    public class Registration_Table
+    { 
+        
+        
             public int Id { get; set; }
 
             [Required(ErrorMessage = "The First Name field is required.")]
@@ -46,8 +47,9 @@ namespace Chandigarh_Estates
             public bool IsActive { get; set; }
 
             [Required(ErrorMessage = "The Registration Id field is required.")]
-            public string RegId { get; set; }
+            public int RegId { get; set; }
         }
     }
+
 
 
