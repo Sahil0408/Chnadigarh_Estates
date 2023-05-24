@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Chandigarh_Estate_Models\ChandigarhEstates.Model.csproj" />
+    <ProjectReference Include="..\ChandigarhEstates.Models\ChandigarhEstates.Model.csproj" />
   </ItemGroup>
 
 </Project>
