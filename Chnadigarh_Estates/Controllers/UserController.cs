@@ -1,4 +1,4 @@
-﻿using Chandigarh_Estates;
+﻿using ChandigarhEstates.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

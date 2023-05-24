@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Chandigarh_Estates;
-using Chandigarh_estates_web.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using System.Net;
+using ChandigarhEstates.Data;
+using ChandigarhEstates.Model;
 
 namespace Chandigarh_Estate_API.Controllers
 {

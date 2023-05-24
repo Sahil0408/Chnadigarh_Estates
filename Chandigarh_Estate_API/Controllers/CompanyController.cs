@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Chandigarh_Estates;
-using Chandigarh_estates_web.Models;
+﻿using ChandigarhEstates.Data;
+using ChandigarhEstates.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
