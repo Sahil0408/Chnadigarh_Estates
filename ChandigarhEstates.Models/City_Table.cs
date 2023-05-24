@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Chandigarh_Estates
+namespace ChandigarhEstates.Model
 {
     public class City_Table
     {

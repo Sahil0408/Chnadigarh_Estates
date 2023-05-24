@@ -1,4 +1,4 @@
-using Chandigarh_estates_web.Models;
+using ChandigarhEstates.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
