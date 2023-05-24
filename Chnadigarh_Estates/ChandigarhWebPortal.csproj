@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Chandigarh_Estate_API\Chandigarh_Estate_API.csproj" />
-    <ProjectReference Include="..\Chandigarh_Estate_Models\ChandigarhEstates.Model.csproj" />
   </ItemGroup>
 
 </Project>
