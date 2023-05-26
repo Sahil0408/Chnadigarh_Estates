@@ -42,10 +42,7 @@ namespace Chandigarh_estates_web.Controllers
             return _Context.Countries.ToList();
         }
 
-        public List<State_Table> ListOfStates()
-        {
-            return _Context.States.ToList();
-        }
+      
 
         public List<State_Table> GetState(int id)
         {
@@ -59,61 +56,7 @@ namespace Chandigarh_estates_web.Controllers
             return cit;
         }
 
-        public IActionResult AddCompany()
-        {
-            TempData["State"] = ListOfStates();
-            return View(new CompanyDetail());
-        }
-        [HttpPost]
-        public IActionResult AddCompany(CompanyDetail com)
-        {
-            _Context.Companies.Add(com);
-            _Context.SaveChanges();
-
-           return RedirectToAction("ManageCompany");
-        }
-
-        [HttpGet]
-        public List<CompanyDetail> GetCompany()
-        {
-            List<CompanyDetail> List = _Context.Companies.ToList();
-            return List;
-        }
-
-        public IActionResult ManageCompany()
-        {
-            List<CompanyDetail> List = _Context.Companies.ToList();
-            return View(List);
-        }
-
-        public IActionResult DeleteManageCompany(int id) 
-        {
-
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri("http://localhost:5079");
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //    //GET Method
-
-
-            //    HttpResponseMessage response = await client.PostAsJsonAsync("api/Account/CheckLogin");
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var stringResponse = await response.Content.ReadAsStringAsync();
-            //        Login_Page _usrDetail = JsonConvert.DeserializeObject<Login_Page>(stringResponse);
-
-            //        return RedirectToAction("Admin");
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Internal server Error");
-            //    }
-            //}
-            return View();
-
-        }
+       
 
         public IActionResult Registration(int id)
         {

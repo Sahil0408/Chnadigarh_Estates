@@ -9,16 +9,15 @@ namespace Chandigarh_Estate_API.Controllers
 
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CompanyController : ControllerBase
+    public class CompanyApiController : ControllerBase
     {
         private readonly ApplicationDbContext _Context;
-        public CompanyController(ApplicationDbContext Context)
+        public CompanyApiController(ApplicationDbContext Context)
         {
             _Context = Context;
         }
 
-        [HttpPost()]
-        [ActionName("AddCompanyDetails")]
+        [HttpPost("SaveAddCompany")]       
         public IActionResult SaveAddCompany(CompanyDetail companyDetail)
         {
             _Context.Companies.Add(companyDetail);
@@ -30,7 +29,7 @@ namespace Chandigarh_Estate_API.Controllers
         }
 
         [HttpPost()]
-        [ActionName("EditCompanyDetails")]
+        
         public IActionResult EditCompany(CompanyDetail companyDetail)
         {
             _Context.Companies.Update(companyDetail);
@@ -43,7 +42,7 @@ namespace Chandigarh_Estate_API.Controllers
 
 
         [HttpDelete()]
-        [ActionName("deleteCompany")]
+        
         public ResponseModel<string> companyDetails(int id)
         {
             ResponseModel<string> objModel = new ResponseModel<string>();
@@ -71,11 +70,20 @@ namespace Chandigarh_Estate_API.Controllers
         }
 
         [HttpGet()]
-        [ActionName("GetCompanies")]
+        
         public List<CompanyDetail> ListOfCompanies()
         {
             return _Context.Companies.ToList();
         }
+
+        [HttpGet("CompanyList")]
+        public List<CompanyDetail> ListCompanies()
+        {
+            var listComapnies = _Context.Companies.FromSqlRaw("Exec getCompanies",new List<SqlParameter>().ToArray());
+
+            return listComapnies.ToList();
+        }
+
 
     }
 }
