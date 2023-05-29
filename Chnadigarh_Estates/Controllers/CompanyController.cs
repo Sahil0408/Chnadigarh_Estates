@@ -9,14 +9,63 @@ namespace ChandigarhWebPortal.Controllers
 {
     public class CompanyController : Controller
     {
-        private readonly ApplicationDbContext _Context;
-        public CompanyController(ApplicationDbContext Context)
+        //private readonly ApplicationDbContext _Context;
+        //public CompanyController(ApplicationDbContext Context)
+        //{
+        //    _Context = Context;
+        //}
+        public async Task<List<State_Table>> ListOfStates()
         {
-            _Context = Context;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:5209");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //GET Method
+
+
+                HttpResponseMessage response = await client.GetAsync("/api/Address/GetstateList/");
+                if (response.IsSuccessStatusCode)
+                {
+                    var stringResponse = await response.Content.ReadAsStringAsync();
+                    List<State_Table> _usrDetail = JsonConvert.DeserializeObject<List<State_Table>>(stringResponse);
+
+                    return _usrDetail;
+                }
+                else
+                {
+                    Console.WriteLine("Internal server Error");
+                }
+            }
+            return null;
         }
-        public List<State_Table> ListOfStates()
+
+        public async Task<List<City_Table>>GetCity(int id)
         {
-            return _Context.States.ToList();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:5209");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //GET Method
+
+
+                HttpResponseMessage response = await client.DeleteAsync("api/Company/CityList/?id=" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    var stringResponse = await response.Content.ReadAsStringAsync();
+                   List<City_Table> _usrDetail = JsonConvert.DeserializeObject<List<City_Table>>(stringResponse);
+
+                    return _usrDetail;
+                }
+                else
+                {
+                    Console.WriteLine("Internal server Error");
+                }
+            }
+            return null ;
         }
         public IActionResult AddCompany()
         {
@@ -54,6 +103,7 @@ namespace ChandigarhWebPortal.Controllers
 
         [HttpGet]
         public async Task <List<CompanyDetail>> GetCompany()
+        
         
         
         
@@ -128,7 +178,7 @@ namespace ChandigarhWebPortal.Controllers
                 //GET Method
 
 
-                HttpResponseMessage response = await client.GetAsync("/api/Company/EditcompanyDetails?id=" + id);
+                HttpResponseMessage response = await client.GetAsync("api/Company/EditcompanyDetails/?id=" + id);
                 if (response.IsSuccessStatusCode)
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();

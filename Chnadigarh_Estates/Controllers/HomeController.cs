@@ -9,6 +9,7 @@ using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 using ChandigarhEstates.Data;
 using ChandigarhEstates.Model;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Chandigarh_estates_web.Controllers
 {
@@ -37,24 +38,46 @@ namespace Chandigarh_estates_web.Controllers
             return View();
         }
      
-        public List<Country_Table> ListOfCountries()
+        public async Task<List<Country_Table>> ListOfCountries()
         {
-            return _Context.Countries.ToList();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:5209");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //GET Method
+
+
+                HttpResponseMessage response = await client.GetAsync("/api/Address/CountriesList/");
+                if (response.IsSuccessStatusCode)
+                {
+                    var stringResponse = await response.Content.ReadAsStringAsync();
+                    List<Country_Table> _usrDetail = JsonConvert.DeserializeObject<List<Country_Table>>(stringResponse);
+
+                    return _usrDetail;
+                }
+                else
+                {
+                    Console.WriteLine("Internal server Error");
+                }
+            }
+            return null;
         }
 
       
 
-        public List<State_Table> GetState(int id)
-        {
-            List<State_Table> obj = _Context.States.Where(s => s.CountryId == id).ToList();
+        //public List<State_Table> GetState(int id)
+        //{
+        //    List<State_Table> obj = _Context.States.Where(s => s.CountryId == id).ToList();
 
-            return obj;
-        }
-        public List<City_Table> GetCity(int id)
-        {
-            List<City_Table> cit = _Context.Cities.Where(c => c.StateId == id).ToList();
-            return cit;
-        }
+        //    return obj;
+        //}
+        //public List<City_Table> GetCity(int id)
+        //{
+        //    List<City_Table> cit = _Context.Cities.Where(c => c.StateId == id).ToList();
+        //    return cit;
+        //}
 
        
 

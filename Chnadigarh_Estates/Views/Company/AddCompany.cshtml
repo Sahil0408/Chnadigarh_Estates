@@ -49,18 +49,18 @@
 
 
 
-                        <select onchange="getCity()" id="ddlState" Name="StateId" asp-for="StateId">
+                       @* <select onchange="getCity()" id="ddlState" Name="StateId" asp-for="StateId">
                             {
                             <option value="">Select One</option>
                             @{
-                                foreach (var state in (List<State_Table>)TempData["State"])
+                                foreach (var state in (List<State_Table>)@TempData["State"])
                                 {
 
                                     <option value="@state.StateId"> @state.StateName</option>
                                 }
                             }
 
-                        </select>
+                        </select>*@
 
 
                         <span class="details"> City</span>

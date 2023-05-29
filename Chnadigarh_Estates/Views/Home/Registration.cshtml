@@ -188,7 +188,7 @@
                                 {
                             <option value="">Select One</option>
                                 @{
-                                    foreach (var country in (List<Country_Table>)TempData["Country"])
+                                    foreach (var country in (List<Country_Table>) TempData["Country"])
                                     {
                                         <option value="@country.CountryId"> @country.CountryName </option>
                                     }
@@ -225,7 +225,7 @@
         debugger;
         var countryId = $("#CountryId").val();
 
-        $.get("/Home/GetState/" + countryId,
+        $.get("/Company/GetState/" + countryId,
             function (res) {
 
                 debugger;
@@ -246,7 +246,7 @@
         debugger;
         var stateId = $("#ddlState").val();
 
-        $.get("/Home/GetCity/" + stateId,
+        $.get("/Company/GetCity/" + stateId,
             function (res) {
 
                 debugger;
